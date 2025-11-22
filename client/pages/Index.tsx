@@ -177,13 +177,13 @@ export default function Index() {
 
             {/* Categories Section */}
             <div className="mb-0">
-              <h3 className="text-xs font-bold text-muted-foreground mb-5 uppercase tracking-widest">
+              <h3 className="text-sm font-black text-foreground mb-6 uppercase tracking-widest flex items-center gap-2">
                 📂 Look into Categories
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Country Dropdown */}
                 <div className="relative group">
-                  <label className="text-xs font-semibold text-muted-foreground block mb-2">
+                  <label className="text-sm font-bold text-foreground block mb-2">
                     By Country
                   </label>
                   <input
