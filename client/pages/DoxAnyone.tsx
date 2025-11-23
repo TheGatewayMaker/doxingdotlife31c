@@ -118,7 +118,7 @@ export default function DoxAnyone() {
 
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-lg bg-accent text-accent-foreground font-bold text-sm sm:text-base">
+                  <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-lg bg-yellow-500 text-slate-900 font-bold text-sm sm:text-base">
                     4
                   </div>
                 </div>
