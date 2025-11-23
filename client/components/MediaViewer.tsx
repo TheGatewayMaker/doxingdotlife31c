@@ -79,7 +79,18 @@ export default function MediaViewer({
     <>
       {/* Media Grid */}
       <div className="border-t border-border pt-12">
-        <h2 className="text-2xl font-bold mb-6">📎 Attached Media</h2>
+        <div className="flex items-center gap-2 mb-6">
+          <svg
+            className="w-6 h-6 text-accent"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 0 18.8-4.3M22 4.5a10 10 0 0 0-18.8 4.3"></path>
+          </svg>
+          <h2 className="text-2xl font-bold">Attached Media</h2>
+        </div>
 
         {/* Thumbnail Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
