@@ -336,6 +336,8 @@ export default function Index() {
   const [countrySearch, setCountrySearch] = useState("");
   const [citySearch, setCitySearch] = useState("");
   const [serverSearch, setServerSearch] = useState("");
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+  const [hasSearchFilters, setHasSearchFilters] = useState(false);
 
   const availableCities = selectedCountry
     ? (CITIES_BY_COUNTRY[selectedCountry] || []).filter((city) =>
