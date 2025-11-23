@@ -59,8 +59,8 @@ export default function DoxAnyone() {
           </div>
 
           {/* Instructions Section */}
-          <div className="bg-card border-2 border-border rounded-lg sm:rounded-xl p-6 sm:p-8 mb-10 sm:mb-12">
-            <h2 className="text-xl sm:text-2xl font-bold mb-5 sm:mb-6 text-foreground">
+          <div className="bg-slate-800 border-2 border-slate-700 rounded-lg sm:rounded-xl p-6 sm:p-8 mb-10 sm:mb-12">
+            <h2 className="text-xl sm:text-2xl font-bold mb-5 sm:mb-6 text-white">
               How It Works
             </h2>
             <div className="space-y-5 sm:space-y-6">
@@ -71,10 +71,10 @@ export default function DoxAnyone() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1 sm:mb-2">
+                  <h3 className="text-base sm:text-lg font-semibold text-white mb-1 sm:mb-2">
                     Click the Dox Button Below
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-gray-400">
                     Click on the "Dox Now" button to proceed with creating your
                     doxing submission.
                   </p>
