@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Upload, LogOut, Image, X } from "lucide-react";
+import { LogOut, X } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { UploadIcon, ImageIcon } from "@/components/Icons";
 
 interface AuthState {
   isAuthenticated: boolean;
