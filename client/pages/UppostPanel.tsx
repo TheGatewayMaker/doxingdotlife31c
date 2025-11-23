@@ -181,6 +181,9 @@ export default function UppostPanel() {
       const response = await fetch("/api/upload", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
       });
 
       if (!response.ok) {
