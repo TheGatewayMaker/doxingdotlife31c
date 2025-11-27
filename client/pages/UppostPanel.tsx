@@ -19,6 +19,7 @@ export default function UppostPanel() {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [server, setServer] = useState("");
+  const [nsfw, setNsfw] = useState(false);
   const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [thumbnailPreview, setThumbnailPreview] = useState<string>("");
   const [mediaFiles, setMediaFiles] = useState<File[]>([]);
@@ -103,6 +104,7 @@ export default function UppostPanel() {
     setCountry("");
     setCity("");
     setServer("");
+    setNsfw(false);
     setThumbnail(null);
     setThumbnailPreview("");
     setMediaFiles([]);
@@ -154,6 +156,7 @@ export default function UppostPanel() {
     formData.append("country", country);
     formData.append("city", city);
     formData.append("server", server);
+    formData.append("nsfw", String(nsfw));
     formData.append("thumbnail", thumbnail);
 
     mediaFiles.forEach((file) => {
@@ -464,6 +467,26 @@ export default function UppostPanel() {
                   placeholder="(optional)"
                 />
               </div>
+            </div>
+
+            {/* NSFW Checkbox */}
+            <div className="flex items-center gap-3 bg-red-900/20 border border-red-600/50 rounded-lg p-4">
+              <input
+                type="checkbox"
+                id="nsfw-checkbox"
+                checked={nsfw}
+                onChange={(e) => setNsfw(e.target.checked)}
+                className="w-5 h-5 accent-red-600 rounded cursor-pointer"
+              />
+              <label htmlFor="nsfw-checkbox" className="flex-1 cursor-pointer">
+                <p className="text-sm font-bold text-red-400 mb-1">
+                  ⚠️ Mark as NSFW
+                </p>
+                <p className="text-xs text-red-300">
+                  This content is Not Safe For Work and requires age
+                  verification
+                </p>
+              </label>
             </div>
 
             {/* Media Upload */}

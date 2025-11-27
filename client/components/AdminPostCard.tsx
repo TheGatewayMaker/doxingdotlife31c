@@ -15,7 +15,7 @@ interface AdminPostCardProps {
   onDelete: (postId: string) => void;
   onUpdate: (post: Post) => void;
   animationDelay: number;
-  authToken: string;
+  getIdToken: () => Promise<string | null>;
 }
 
 export default function AdminPostCard({
@@ -23,7 +23,7 @@ export default function AdminPostCard({
   onDelete,
   onUpdate,
   animationDelay,
-  authToken,
+  getIdToken,
 }: AdminPostCardProps) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showMediaModal, setShowMediaModal] = useState(false);
@@ -63,9 +63,16 @@ export default function AdminPostCard({
 
         {/* Content */}
         <div className="p-5 flex-1 flex flex-col">
-          <h3 className="font-bold text-foreground text-base line-clamp-2 mb-2 hover:text-accent transition-colors">
-            {post.title}
-          </h3>
+          <div className="flex items-start justify-between gap-2 mb-2">
+            <h3 className="font-bold text-foreground text-base line-clamp-2 flex-1 hover:text-accent transition-colors">
+              {post.title}
+            </h3>
+            {post.nsfw && (
+              <span className="inline-flex items-center gap-1 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold flex-shrink-0">
+                ⚠️ NSFW
+              </span>
+            )}
+          </div>
           <p className="text-sm text-muted-foreground line-clamp-2 mb-3 flex-1">
             {post.description}
           </p>
@@ -139,7 +146,7 @@ export default function AdminPostCard({
           post={post}
           onClose={() => setShowEditModal(false)}
           onUpdate={onUpdate}
-          authToken={authToken}
+          getIdToken={getIdToken}
         />
       )}
 
@@ -148,7 +155,7 @@ export default function AdminPostCard({
           post={post}
           onClose={() => setShowMediaModal(false)}
           onUpdate={onUpdate}
-          authToken={authToken}
+          getIdToken={getIdToken}
         />
       )}
     </>

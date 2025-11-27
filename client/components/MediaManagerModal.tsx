@@ -7,14 +7,14 @@ interface MediaManagerModalProps {
   post: Post;
   onClose: () => void;
   onUpdate: (post: Post) => void;
-  authToken: string;
+  getIdToken: () => Promise<string | null>;
 }
 
 export default function MediaManagerModal({
   post,
   onClose,
   onUpdate,
-  authToken,
+  getIdToken,
 }: MediaManagerModalProps) {
   const [deletingFileName, setDeletingFileName] = useState<string | null>(null);
   const [isDeletingFile, setIsDeletingFile] = useState(false);
@@ -63,12 +63,17 @@ export default function MediaManagerModal({
 
     try {
       setIsDeletingFile(true);
+      const idToken = await getIdToken();
+      if (!idToken) {
+        throw new Error("Authentication token not available");
+      }
+
       const response = await fetch(
         `/api/posts/${post.id}/media/${encodeURIComponent(deletingFileName)}`,
         {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${authToken}`,
+            Authorization: `Bearer ${idToken}`,
           },
         },
       );

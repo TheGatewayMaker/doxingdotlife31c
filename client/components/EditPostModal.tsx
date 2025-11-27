@@ -7,7 +7,7 @@ interface EditPostModalProps {
   post: Post;
   onClose: () => void;
   onUpdate: (post: Post) => void;
-  authToken: string;
+  getIdToken: () => Promise<string | null>;
 }
 
 const COUNTRIES = [
@@ -100,13 +100,14 @@ export default function EditPostModal({
   post,
   onClose,
   onUpdate,
-  authToken,
+  getIdToken,
 }: EditPostModalProps) {
   const [title, setTitle] = useState(post.title);
   const [description, setDescription] = useState(post.description);
   const [country, setCountry] = useState(post.country || "");
   const [city, setCity] = useState(post.city || "");
   const [server, setServer] = useState(post.server || "");
+  const [nsfw, setNsfw] = useState(post.nsfw || false);
   const [isSaving, setIsSaving] = useState(false);
   const [countrySearch, setCountrySearch] = useState("");
 
@@ -122,11 +123,16 @@ export default function EditPostModal({
 
     try {
       setIsSaving(true);
+      const idToken = await getIdToken();
+      if (!idToken) {
+        throw new Error("Authentication token not available");
+      }
+
       const response = await fetch(`/api/posts/${post.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${idToken}`,
         },
         body: JSON.stringify({
           title: title.trim(),
@@ -134,6 +140,7 @@ export default function EditPostModal({
           country: country.trim(),
           city: city.trim(),
           server: server.trim(),
+          nsfw,
         }),
       });
 
@@ -149,6 +156,7 @@ export default function EditPostModal({
         country: result.post.country,
         city: result.post.city,
         server: result.post.server,
+        nsfw: result.post.nsfw,
       });
       toast.success("Post updated successfully");
       onClose();
@@ -250,6 +258,29 @@ export default function EditPostModal({
                 Selected: <span className="font-semibold">{country}</span>
               </p>
             )}
+          </div>
+
+          {/* NSFW Toggle */}
+          <div>
+            <div className="flex items-center gap-3 bg-red-900/20 border border-red-600/50 rounded-lg p-4">
+              <input
+                type="checkbox"
+                id="nsfw-toggle"
+                checked={nsfw}
+                onChange={(e) => setNsfw(e.target.checked)}
+                disabled={isSaving}
+                className="w-5 h-5 accent-red-600 rounded cursor-pointer disabled:opacity-50"
+              />
+              <label htmlFor="nsfw-toggle" className="flex-1 cursor-pointer">
+                <p className="text-sm font-bold text-red-400 mb-1">
+                  ⚠️ Mark as NSFW
+                </p>
+                <p className="text-xs text-red-300">
+                  This content is Not Safe For Work and requires age
+                  verification
+                </p>
+              </label>
+            </div>
           </div>
 
           {/* City */}

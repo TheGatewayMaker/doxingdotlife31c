@@ -4,6 +4,7 @@ import { Share2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SimpleMediaGallery from "@/components/SimpleMediaGallery";
+import NSFWWarningModal from "@/components/NSFWWarningModal";
 import { Post } from "@shared/api";
 import { GlobeIcon, MapPinIcon, ServerIcon } from "@/components/Icons";
 
@@ -14,6 +15,8 @@ export default function PostDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [thumbnailError, setThumbnailError] = useState(false);
+  const [showNSFWWarning, setShowNSFWWarning] = useState(false);
+  const [nsfwApproved, setNsfwApproved] = useState(false);
 
   useEffect(() => {
     const loadPost = async () => {
@@ -25,6 +28,9 @@ export default function PostDetail() {
 
         if (foundPost) {
           setPosts(foundPost);
+          if (foundPost.nsfw) {
+            setShowNSFWWarning(true);
+          }
         } else {
           setError("Post not found");
         }
@@ -78,6 +84,21 @@ export default function PostDetail() {
     );
   }
 
+  if (showNSFWWarning && !nsfwApproved && post.nsfw) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex flex-col animate-fadeIn">
+        <Header />
+        <main className="flex-1 w-full flex items-center justify-center p-4">
+          <NSFWWarningModal
+            onProceed={() => setNsfwApproved(true)}
+            onGoBack={() => navigate("/")}
+          />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col animate-fadeIn">
       <Header />
@@ -105,7 +126,11 @@ export default function PostDetail() {
 
           {/* Post Content */}
           <div
-            className="bg-card border border-border rounded-xl overflow-hidden shadow-lg animate-fadeIn"
+            className={`rounded-xl overflow-hidden shadow-lg animate-fadeIn ${
+              post.nsfw
+                ? "bg-gradient-to-br from-red-900/50 to-red-800/50 border border-red-600"
+                : "bg-card border border-border"
+            }`}
             style={{ animationDelay: "0.1s" }}
           >
             {/* Thumbnail */}
@@ -210,6 +235,12 @@ export default function PostDetail() {
         </div>
       </main>
       <Footer />
+      {post.nsfw && (
+        <div className="fixed bottom-0 left-0 right-0 bg-red-900/80 border-t border-red-600 px-4 py-2 text-center text-sm text-red-200">
+          ⚠️ This is NSFW content. Please ensure you're viewing in an
+          appropriate setting.
+        </div>
+      )}
     </div>
   );
 }

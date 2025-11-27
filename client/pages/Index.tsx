@@ -665,7 +665,11 @@ export default function Index() {
                   <div
                     key={post.id}
                     onClick={() => navigate(`/post/${post.id}`)}
-                    className="group bg-slate-800 border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 cursor-pointer hover:-translate-y-1 animate-fadeIn"
+                    className={`group rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:-translate-y-1 animate-fadeIn ${
+                      post.nsfw
+                        ? "bg-gradient-to-br from-red-900 to-red-800 border border-red-600 hover:border-red-500 hover:shadow-xl hover:shadow-red-600/30"
+                        : "bg-slate-800 border border-slate-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/20"
+                    }`}
                     style={{ animationDelay: `${idx * 0.05}s` }}
                   >
                     {post.thumbnail && (
@@ -687,7 +691,7 @@ export default function Index() {
                               errorDiv.className =
                                 "text-center text-muted-foreground flex flex-col items-center justify-center gap-2";
                               errorDiv.innerHTML =
-                                '<div class="text-3xl">🖼️</div><div class="text-xs">Image unavailable</div>';
+                                '<div class="text-3xl">🖼��</div><div class="text-xs">Image unavailable</div>';
                               parent.appendChild(errorDiv);
                             }
                           }}
@@ -697,27 +701,62 @@ export default function Index() {
                       </div>
                     )}
                     <div className="p-5">
-                      <h3 className="font-bold text-white text-base line-clamp-2 mb-3 group-hover:text-blue-400 transition-colors">
-                        {post.title}
-                      </h3>
-                      <p className="text-sm text-gray-400 line-clamp-3 mb-4">
+                      <div className="flex items-start justify-between gap-2 mb-3">
+                        <h3
+                          className={`font-bold text-base line-clamp-2 flex-1 ${
+                            post.nsfw
+                              ? "text-red-100 group-hover:text-red-50"
+                              : "text-white group-hover:text-blue-400"
+                          } transition-colors`}
+                        >
+                          {post.title}
+                        </h3>
+                        {post.nsfw && (
+                          <span className="inline-flex items-center gap-1 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold flex-shrink-0">
+                            ⚠️ NSFW
+                          </span>
+                        )}
+                      </div>
+                      <p
+                        className={`text-sm line-clamp-3 mb-4 ${
+                          post.nsfw ? "text-red-200" : "text-gray-400"
+                        }`}
+                      >
                         {post.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {post.country && (
-                          <span className="inline-flex items-center gap-1 bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-xs font-medium">
+                          <span
+                            className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${
+                              post.nsfw
+                                ? "bg-red-600/30 text-red-200"
+                                : "bg-blue-600/20 text-blue-300"
+                            }`}
+                          >
                             <GlobeIcon className="w-3 h-3" />
                             {post.country}
                           </span>
                         )}
                         {post.city && (
-                          <span className="inline-flex items-center gap-1 bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-xs font-medium">
+                          <span
+                            className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${
+                              post.nsfw
+                                ? "bg-red-600/30 text-red-200"
+                                : "bg-blue-600/20 text-blue-300"
+                            }`}
+                          >
                             <MapPinIcon className="w-3 h-3" />
                             {post.city}
                           </span>
                         )}
                         {post.server && (
-                          <span className="inline-flex items-center gap-1 bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-xs font-medium">
+                          <span
+                            className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${
+                              post.nsfw
+                                ? "bg-red-600/30 text-red-200"
+                                : "bg-blue-600/20 text-blue-300"
+                            }`}
+                          >
                             <ServerIcon className="w-3 h-3" />
                             {post.server}
                           </span>

@@ -60,7 +60,7 @@ export const handleDeleteMediaFile: RequestHandler = async (req, res) => {
 export const handleUpdatePost: RequestHandler = async (req, res) => {
   try {
     const { postId } = req.params;
-    const { title, description, country, city, server } = req.body;
+    const { title, description, country, city, server, nsfw } = req.body;
 
     if (!postId) {
       res.status(400).json({ error: "Post ID is required" });
@@ -79,6 +79,7 @@ export const handleUpdatePost: RequestHandler = async (req, res) => {
       country?: string;
       city?: string;
       server?: string;
+      nsfw?: boolean;
     } = {};
 
     if (title !== undefined) updates.title = title;
@@ -86,6 +87,7 @@ export const handleUpdatePost: RequestHandler = async (req, res) => {
     if (country !== undefined) updates.country = country;
     if (city !== undefined) updates.city = city;
     if (server !== undefined) updates.server = server;
+    if (nsfw !== undefined) updates.nsfw = nsfw === "true" || nsfw === true;
 
     const updatedMetadata = await updatePostMetadataField(postId, updates);
 
