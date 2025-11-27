@@ -301,23 +301,23 @@ export default function AdminPanel() {
                 placeholder="Search posts by title, description, or ID..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 sm:px-5 py-3 sm:py-3.5 bg-card border-2 border-border hover:border-accent/50 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-sm sm:text-base transition-all shadow-md hover:shadow-lg"
+                className="w-full px-4 sm:px-5 py-3 sm:py-3.5 bg-card/50 border-2 border-border/60 hover:border-accent/60 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent text-sm sm:text-base transition-all shadow-lg hover:shadow-2xl hover:shadow-accent/20"
               />
               <SearchIcon className="absolute right-4 sm:right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
             </div>
 
             {/* Filter Section */}
             <div
-              className="mb-0 animate-fadeIn"
+              className="bg-gradient-to-br from-card/40 to-card/20 border border-border/40 rounded-2xl p-6 mb-0 animate-fadeIn"
               style={{ animationDelay: "0.3s" }}
             >
-              <div className="flex items-center gap-2 mb-5">
+              <div className="flex items-center gap-2 mb-6">
                 <FilterIcon className="w-4 h-4 text-accent" />
                 <h3 className="text-xs font-black text-foreground uppercase tracking-widest">
                   Filter by Category
                 </h3>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* Country Dropdown */}
                 <div className="relative group">
                   <label className="text-sm font-bold text-foreground block mb-3 flex items-center gap-2">
@@ -331,7 +331,7 @@ export default function AdminPanel() {
                     }
                     value={countrySearch}
                     onChange={(e) => setCountrySearch(e.target.value)}
-                    className="w-full px-4 py-3 bg-card border border-border hover:border-accent/50 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-sm transition-all shadow-sm hover:shadow-md"
+                    className="w-full px-4 py-3 bg-background/50 border-2 border-border/60 hover:border-accent/60 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent text-sm transition-all shadow-md hover:shadow-lg hover:shadow-accent/20"
                   />
                   {countrySearch && (
                     <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg z-50 max-h-48 overflow-y-auto shadow-lg">
