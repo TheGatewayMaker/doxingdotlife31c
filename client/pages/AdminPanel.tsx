@@ -433,7 +433,7 @@ export default function AdminPanel() {
                   <button
                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
-                    className="px-3 sm:px-4 py-2 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg active:scale-95 text-sm sm:text-base"
+                    className="px-3 sm:px-4 py-2 bg-gradient-to-r from-accent to-accent/90 text-accent-foreground font-medium rounded-xl hover:shadow-lg hover:shadow-accent/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md active:scale-95 text-sm sm:text-base"
                   >
                     ← Prev
                   </button>
@@ -446,8 +446,8 @@ export default function AdminPanel() {
                           className={cn(
                             "w-9 h-9 sm:w-10 sm:h-10 rounded-lg font-medium transition-all text-xs sm:text-sm shadow-sm hover:shadow-md",
                             currentPage === page
-                              ? "bg-accent text-accent-foreground"
-                              : "bg-card border border-border hover:border-accent text-foreground",
+                              ? "bg-gradient-to-r from-accent to-accent/90 text-accent-foreground shadow-lg"
+                              : "bg-card/60 border-2 border-border/60 hover:border-accent/60 text-foreground hover:shadow-lg hover:shadow-accent/10",
                           )}
                         >
                           {page}
@@ -460,7 +460,7 @@ export default function AdminPanel() {
                       setCurrentPage(Math.min(totalPages, currentPage + 1))
                     }
                     disabled={currentPage === totalPages}
-                    className="px-3 sm:px-4 py-2 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg active:scale-95 text-sm sm:text-base"
+                    className="px-3 sm:px-4 py-2 bg-gradient-to-r from-accent to-accent/90 text-accent-foreground font-medium rounded-xl hover:shadow-lg hover:shadow-accent/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md active:scale-95 text-sm sm:text-base"
                   >
                     Next →
                   </button>
