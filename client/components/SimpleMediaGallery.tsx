@@ -121,9 +121,9 @@ export default function SimpleMediaGallery({
       </div>
 
       {/* Thumbnail Grid */}
-      {mediaFiles.length > 1 && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {mediaFiles.map((file, idx) => {
+      {filteredMediaFiles.length > 1 && (
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2">
+          {filteredMediaFiles.map((file, idx) => {
             const isImg = file.type.startsWith("image/");
             const isVid = file.type.startsWith("video/");
             const isSelected = selectedMediaIndex === idx;
