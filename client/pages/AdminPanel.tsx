@@ -332,8 +332,8 @@ export default function AdminPanel() {
               <div className="grid grid-cols-1 gap-3">
                 {/* Country Dropdown */}
                 <div className="relative group">
-                  <label className="text-xs font-bold text-foreground block mb-2 flex items-center gap-1.5 group-hover:text-accent transition-colors">
-                    <GlobeIcon className="w-3 h-3 text-blue-500" />
+                  <label className="text-xs font-bold text-foreground block mb-2 flex items-center gap-1.5">
+                    <GlobeIcon className="w-3 h-3 text-muted-foreground" />
                     Country
                   </label>
                   <input
@@ -343,10 +343,10 @@ export default function AdminPanel() {
                     }
                     value={countrySearch}
                     onChange={(e) => setCountrySearch(e.target.value)}
-                    className="w-full px-3 py-2 bg-background/60 border-2 border-border/60 hover:border-blue-500/40 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 text-xs transition-all shadow-sm hover:shadow-lg hover:shadow-blue-500/10"
+                    className="w-full px-3 py-2 bg-background/60 border border-border hover:border-muted rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-muted/50 focus:border-muted text-xs transition-all"
                   />
                   {countrySearch && (
-                    <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg z-50 max-h-40 overflow-y-auto shadow-lg shadow-black/10">
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg z-50 max-h-40 overflow-y-auto shadow-lg">
                       {filteredCountries.length > 0 ? (
                         filteredCountries.map((country) => (
                           <button
@@ -355,7 +355,7 @@ export default function AdminPanel() {
                               setSelectedCountry(country);
                               setCountrySearch("");
                             }}
-                            className="w-full text-left px-3 py-2 hover:bg-blue-600/20 hover:border-l-2 hover:border-l-blue-500 text-foreground text-xs transition-all duration-200 flex items-center gap-2"
+                            className="w-full text-left px-3 py-2 hover:bg-muted text-foreground text-xs transition-all duration-200 flex items-center gap-2"
                           >
                             <GlobeIcon className="w-3 h-3 text-muted-foreground" />
                             {country}
