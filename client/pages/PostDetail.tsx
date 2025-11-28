@@ -150,11 +150,11 @@ export default function PostDetail() {
           <div className="max-w-5xl mx-auto">
             {/* NSFW Warning Banner */}
             {post.nsfw && (
-              <div className="mb-8 bg-gradient-to-r from-red-950/40 to-red-900/20 border border-red-600/40 rounded-xl p-4 sm:p-5 flex items-start gap-3 sm:gap-4 animate-fadeIn">
+              <div className="mb-8 bg-gray-800 border border-gray-700 rounded-xl p-4 sm:p-5 flex items-start gap-3 sm:gap-4 animate-fadeIn">
                 <div className="text-3xl flex-shrink-0">🔞</div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-red-300 mb-1">NSFW Content Warning</p>
-                  <p className="text-sm text-red-200/70">
+                  <p className="font-bold text-gray-300 mb-1">NSFW Content Warning</p>
+                  <p className="text-sm text-gray-500">
                     This post contains explicit content. Ensure you're viewing in an appropriate and private setting.
                   </p>
                 </div>
@@ -164,7 +164,7 @@ export default function PostDetail() {
             {/* Thumbnail Section */}
             <section className="mb-10 sm:mb-12 animate-fadeIn" style={{ animationDelay: "0.1s" }}>
               {post.thumbnail && !thumbnailError && (
-                <div className="rounded-xl overflow-hidden border border-blue-500/30 shadow-2xl max-w-3xl mx-auto">
+                <div className="rounded-xl overflow-hidden border border-gray-700 shadow-2xl max-w-3xl mx-auto">
                   <img
                     src={post.thumbnail}
                     alt={post.title}
@@ -176,10 +176,10 @@ export default function PostDetail() {
               )}
 
               {thumbnailError && (
-                <div className="w-full h-96 bg-slate-800 flex items-center justify-center rounded-xl border border-slate-700">
+                <div className="w-full h-96 bg-gray-800 flex items-center justify-center rounded-xl border border-gray-700">
                   <div className="text-center">
                     <div className="text-8xl mb-3">🖼️</div>
-                    <p className="text-gray-400">Thumbnail unavailable</p>
+                    <p className="text-gray-500">Thumbnail unavailable</p>
                   </div>
                 </div>
               )}
