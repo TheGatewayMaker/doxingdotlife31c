@@ -4,7 +4,10 @@ import {
   deleteMediaFile,
   updatePostMetadataField,
   getPostMetadata,
+  listPostFiles,
+  getMediaUrl,
 } from "../utils/r2-storage";
+import { Post } from "@shared/api";
 
 export const handleDeletePost: RequestHandler = async (req, res) => {
   try {
