@@ -285,19 +285,19 @@ export default function AdminPanel() {
 
       <main className="flex-1 w-full">
         {/* Hero Section */}
-        <div className="bg-gradient-to-br from-blue-600/10 via-background to-background pt-8 pb-8 md:pt-16 md:pb-12 border-b border-border/40">
+        <div className="bg-gradient-to-br from-blue-600/10 via-background to-background py-4 md:py-6 border-b border-border/40">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="animate-fadeIn" style={{ animationDelay: "0.1s" }}>
-              <div className="flex items-center gap-4 mb-3">
-                <div className="p-3 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl shadow-xl">
-                  <EditIcon className="w-8 h-8 text-white" />
+              <div className="flex items-center gap-2 mb-3">
+                <div className="p-2 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg shadow-xl">
+                  <EditIcon className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tighter leading-tight">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight leading-tight">
                     Admin Panel
                   </h1>
-                  <p className="text-base sm:text-lg md:text-xl font-semibold text-muted-foreground mt-2">
-                    Comprehensive post management and analytics
+                  <p className="text-xs sm:text-sm font-semibold text-muted-foreground mt-1">
+                    Manage your posts
                   </p>
                 </div>
               </div>
@@ -305,45 +305,42 @@ export default function AdminPanel() {
 
             {/* Search Bar */}
             <div
-              className="relative mb-8 animate-fadeIn mt-8"
+              className="relative animate-fadeIn mt-4"
               style={{ animationDelay: "0.2s" }}
             >
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search posts by title, description, or ID..."
+                  placeholder="Search posts..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-card border-2 border-border hover:border-accent/40 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent text-sm sm:text-base transition-all shadow-lg hover:shadow-2xl hover:shadow-blue-600/10 pl-12"
+                  className="w-full px-3 sm:px-4 py-2.5 bg-card border-2 border-border hover:border-accent/40 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent text-sm transition-all shadow-md hover:shadow-lg hover:shadow-blue-600/10 pl-9"
                 />
-                <SearchIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+                <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
               </div>
             </div>
 
             {/* Filter Section */}
             <div
-              className="bg-gradient-to-br from-card via-card/50 to-card/30 border border-border/60 rounded-2xl p-6 sm:p-8 mb-0 animate-fadeIn shadow-xl shadow-black/5"
+              className="bg-gradient-to-br from-card via-card/50 to-card/30 border border-border/60 rounded-lg p-4 mt-3 animate-fadeIn shadow-lg shadow-black/5"
               style={{ animationDelay: "0.3s" }}
             >
-              <div className="flex items-center gap-3 mb-7">
-                <div className="p-2 bg-blue-600/20 rounded-lg">
-                  <FilterIcon className="w-5 h-5 text-blue-500" />
+              <div className="flex items-center gap-2 mb-4">
+                <div className="p-1.5 bg-blue-600/20 rounded-md">
+                  <FilterIcon className="w-4 h-4 text-blue-500" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-black text-foreground uppercase tracking-widest">
-                    Advanced Filtering
+                  <h3 className="text-xs font-bold text-foreground uppercase tracking-wider">
+                    Filter
                   </h3>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Filter posts by category and region
-                  </p>
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 gap-3">
                 {/* Country Dropdown */}
                 <div className="relative group">
-                  <label className="text-sm font-bold text-foreground block mb-3 flex items-center gap-2 group-hover:text-accent transition-colors">
-                    <GlobeIcon className="w-4 h-4 text-blue-500" />
-                    Country Filter
+                  <label className="text-xs font-bold text-foreground block mb-2 flex items-center gap-1.5 group-hover:text-accent transition-colors">
+                    <GlobeIcon className="w-3 h-3 text-blue-500" />
+                    Country
                   </label>
                   <input
                     type="text"
@@ -352,10 +349,10 @@ export default function AdminPanel() {
                     }
                     value={countrySearch}
                     onChange={(e) => setCountrySearch(e.target.value)}
-                    className="w-full px-4 py-3 bg-background/60 border-2 border-border/60 hover:border-blue-500/40 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 text-sm transition-all shadow-sm hover:shadow-lg hover:shadow-blue-500/10"
+                    className="w-full px-3 py-2 bg-background/60 border-2 border-border/60 hover:border-blue-500/40 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 text-xs transition-all shadow-sm hover:shadow-lg hover:shadow-blue-500/10"
                   />
                   {countrySearch && (
-                    <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg z-50 max-h-48 overflow-y-auto shadow-xl shadow-black/10">
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg z-50 max-h-40 overflow-y-auto shadow-lg shadow-black/10">
                       {filteredCountries.length > 0 ? (
                         filteredCountries.map((country) => (
                           <button
@@ -364,14 +361,14 @@ export default function AdminPanel() {
                               setSelectedCountry(country);
                               setCountrySearch("");
                             }}
-                            className="w-full text-left px-4 py-3 hover:bg-blue-600/20 hover:border-l-2 hover:border-l-blue-500 text-foreground text-sm transition-all duration-200 flex items-center gap-2"
+                            className="w-full text-left px-3 py-2 hover:bg-blue-600/20 hover:border-l-2 hover:border-l-blue-500 text-foreground text-xs transition-all duration-200 flex items-center gap-2"
                           >
                             <GlobeIcon className="w-3 h-3 text-muted-foreground" />
                             {country}
                           </button>
                         ))
                       ) : (
-                        <div className="px-4 py-3 text-muted-foreground text-sm text-center">
+                        <div className="px-3 py-2 text-muted-foreground text-xs text-center">
                           No countries found
                         </div>
                       )}
@@ -386,7 +383,7 @@ export default function AdminPanel() {
                       className="absolute top-3 right-3 text-accent hover:text-accent/80 hover:scale-110 transition-all"
                       title="Clear selection"
                     >
-                      <CloseIcon className="w-4 h-4" />
+                      <CloseIcon className="w-3 h-3" />
                     </button>
                   )}
                 </div>
