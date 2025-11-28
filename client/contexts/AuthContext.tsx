@@ -28,6 +28,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Listen for Firebase auth state changes
   useEffect(() => {
+    if (!auth) {
+      console.warn(
+        "Firebase Auth is not initialized. Authentication features will be unavailable.",
+      );
+      setIsLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setIsLoading(false);
