@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Post, PostsResponse } from "@shared/api";
 import { GlobeIcon, MapPinIcon, ServerIcon, CloseIcon } from "@/components/Icons";
-import { Flame } from "lucide-react";
+import { Flame, Search } from "lucide-react";
 
 const COUNTRIES = [
   "Afghanistan",
