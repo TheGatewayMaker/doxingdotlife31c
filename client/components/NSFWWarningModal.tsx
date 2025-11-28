@@ -1,4 +1,4 @@
-import { CloseIcon } from "./Icons";
+import { CloseIcon, NSFWIcon } from "./Icons";
 
 interface NSFWWarningModalProps {
   onProceed: () => void;
