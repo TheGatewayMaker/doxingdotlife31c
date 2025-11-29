@@ -6,7 +6,12 @@ import {
   useEffect,
 } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
-import { auth, signInWithGoogle, signOutUser } from "@/lib/firebase";
+import {
+  auth,
+  signInWithGoogle,
+  signOutUser,
+  getIdToken,
+} from "@/lib/firebase";
 
 interface AuthContextType {
   user: User | null;
@@ -16,6 +21,7 @@ interface AuthContextType {
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
   checkAuth: () => Promise<boolean>;
+  getIdToken: () => Promise<string | null>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -80,6 +86,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         loginWithGoogle,
         logout,
         checkAuth,
+        getIdToken,
       }}
     >
       {children}
