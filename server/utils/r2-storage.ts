@@ -281,11 +281,27 @@ export const getPostMetadata = async (
 
     if (response.Body) {
       const bodyString = await response.Body.transformToString();
-      return JSON.parse(bodyString) as PostMetadata;
+      const parsed = JSON.parse(bodyString);
+
+      // Validate required fields
+      if (typeof parsed !== 'object' || parsed === null || !parsed.id) {
+        console.warn(`Invalid post metadata for ${postId}: missing required fields`);
+        return null;
+      }
+
+      // Validate that mediaFiles is an array if present
+      if (parsed.mediaFiles && !Array.isArray(parsed.mediaFiles)) {
+        console.warn(`Invalid mediaFiles in metadata for ${postId}: not an array`);
+        parsed.mediaFiles = [];
+      }
+
+      return parsed as PostMetadata;
     }
 
     return null;
   } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.warn(`Error reading post metadata for ${postId}: ${errorMsg}`);
     return null;
   }
 };
