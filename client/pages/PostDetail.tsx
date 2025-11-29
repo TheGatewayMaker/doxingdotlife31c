@@ -40,6 +40,35 @@ export default function PostDetail() {
     loadPost();
   }, [postId]);
 
+  const handleDelete = async () => {
+    if (!postId) return;
+
+    if (
+      !window.confirm(
+        "Are you sure you want to delete this post? This action cannot be undone.",
+      )
+    ) {
+      return;
+    }
+
+    setDeleting(true);
+    try {
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete post");
+      }
+
+      navigate("/");
+    } catch (err) {
+      console.error("Error deleting post:", err);
+      setError("Failed to delete post. Please try again.");
+      setDeleting(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background text-foreground flex flex-col animate-fadeIn">
