@@ -48,7 +48,7 @@ const getServerlessHandler = () => {
       request: (request: any, event: any, context: any) => {
         // Log request details for debugging
         console.log(
-          `[${new Date().toISOString()}] ${event.httpMethod} ${event.path} - Content-Type: ${event.headers['content-type'] || 'unknown'}`,
+          `[${new Date().toISOString()}] ${event.httpMethod} ${event.path} - Content-Type: ${event.headers["content-type"] || "unknown"}`,
         );
       },
       response: (response: any) => {
@@ -56,8 +56,8 @@ const getServerlessHandler = () => {
         if (!response.headers) {
           response.headers = {};
         }
-        if (!response.headers['content-type']) {
-          response.headers['content-type'] = 'application/json';
+        if (!response.headers["content-type"]) {
+          response.headers["content-type"] = "application/json";
         }
         return response;
       },
@@ -84,12 +84,12 @@ export const handler = async (event: any, context: any) => {
     const result = await handler(event, context);
 
     // Ensure result is always valid JSON
-    if (result && typeof result === 'object') {
+    if (result && typeof result === "object") {
       if (!result.headers) {
         result.headers = {};
       }
-      if (!result.headers['Content-Type']) {
-        result.headers['Content-Type'] = 'application/json';
+      if (!result.headers["Content-Type"]) {
+        result.headers["Content-Type"] = "application/json";
       }
     }
 
