@@ -74,24 +74,33 @@ export function createServer() {
   });
 
   // Health check endpoint
-  app.get("/api/health", (_req, res) => {
-    const hasFirebaseConfig = !!process.env.FIREBASE_PROJECT_ID;
-    const hasAuthorizedEmails = !!process.env.VITE_AUTHORIZED_EMAILS;
-    const hasR2Config = !!(
-      process.env.R2_ACCESS_KEY_ID &&
-      process.env.R2_SECRET_ACCESS_KEY &&
-      process.env.R2_ACCOUNT_ID &&
-      process.env.R2_BUCKET_NAME
-    );
+  app.get("/api/health", async (_req, res) => {
+    try {
+      const hasFirebaseConfig = !!process.env.FIREBASE_PROJECT_ID;
+      const hasAuthorizedEmails = !!process.env.VITE_AUTHORIZED_EMAILS;
+      const r2Validation = await validateR2Configuration();
 
-    res.json({
-      status: hasR2Config ? "ok" : "partial",
-      environment: process.env.NODE_ENV || "development",
-      firebaseConfigured: hasFirebaseConfig,
-      authorizedEmailsConfigured: hasAuthorizedEmails,
-      r2Configured: hasR2Config,
-      timestamp: new Date().toISOString(),
-    });
+      res.json({
+        status: r2Validation.isValid ? "ok" : "partial",
+        environment: process.env.NODE_ENV || "development",
+        firebaseConfigured: hasFirebaseConfig,
+        authorizedEmailsConfigured: hasAuthorizedEmails,
+        r2: {
+          configured: r2Validation.isValid,
+          message: r2Validation.message,
+          details: process.env.NODE_ENV === "development" ? r2Validation.details : undefined,
+        },
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error) {
+      console.error("Health check error:", error);
+      res.status(500).json({
+        status: "error",
+        environment: process.env.NODE_ENV || "development",
+        error: "Health check failed",
+        timestamp: new Date().toISOString(),
+      });
+    }
   });
 
   // Example API routes
