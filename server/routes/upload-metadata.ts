@@ -3,6 +3,7 @@ import {
   uploadPostMetadataWithThumbnail,
   getServersList,
   updateServersList,
+  getMediaUrl,
 } from "../utils/r2-storage";
 
 interface UploadMetadataRequest {
