@@ -99,7 +99,10 @@ export const generatePresignedUploadUrls = async (
 
     for (const file of files) {
       const sanitizedName = sanitizePresignedFileName(file.fileName);
-      const key = `posts/${postId}/${Date.now()}-${Math.random().toString(36).substring(7)}-${sanitizedName}`;
+      const timestamp = Date.now();
+      const randomId = Math.random().toString(36).substring(7);
+      const actualFileName = `${timestamp}-${randomId}-${sanitizedName}`;
+      const key = `posts/${postId}/${actualFileName}`;
 
       const command = new PutObjectCommand({
         Bucket: bucketName,
@@ -116,14 +119,14 @@ export const generatePresignedUploadUrls = async (
       });
 
       presignedUrls.push({
-        fileName: file.fileName,
+        fileName: actualFileName,
         signedUrl,
         contentType: file.contentType,
         fileSize: file.fileSize,
       });
 
       console.log(
-        `[${new Date().toISOString()}] Generated presigned URL for ${file.fileName} (${(file.fileSize / 1024 / 1024).toFixed(2)}MB)`,
+        `[${new Date().toISOString()}] Generated presigned URL for ${actualFileName} (${(file.fileSize / 1024 / 1024).toFixed(2)}MB)`,
       );
     }
 
