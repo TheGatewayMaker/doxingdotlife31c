@@ -32,26 +32,26 @@ export const handleUploadMetadata: RequestHandler = async (req, res) => {
       city,
       server,
       nsfw,
-      thumbnailUrl,
+      thumbnailFileName,
       mediaFiles,
       isTrend,
       trendRank,
     } = req.body as UploadMetadataRequest;
 
     // Validate required fields
-    if (!postId || !title || !description || !thumbnailUrl || !mediaFiles) {
+    if (!postId || !title || !description || !thumbnailFileName || !mediaFiles) {
       console.error("Missing required metadata fields", {
         postId: !!postId,
         title: !!title,
         description: !!description,
-        thumbnailUrl: !!thumbnailUrl,
+        thumbnailFileName: !!thumbnailFileName,
         mediaFiles: !!mediaFiles,
       });
 
       if (!res.headersSent) {
         res.status(400).json({
           error:
-            "Missing required fields: postId, title, description, thumbnailUrl, and mediaFiles are all required",
+            "Missing required fields: postId, title, description, thumbnailFileName, and mediaFiles are all required",
         });
         responseSent = true;
       }
