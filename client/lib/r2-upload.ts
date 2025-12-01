@@ -77,11 +77,7 @@ export const uploadFileToR2 = async (
       if (xhr.status >= 200 && xhr.status < 300) {
         resolve();
       } else {
-        reject(
-          new Error(
-            `R2 upload failed: ${xhr.status} ${xhr.statusText}`,
-          ),
-        );
+        reject(new Error(`R2 upload failed: ${xhr.status} ${xhr.statusText}`));
       }
     });
 
